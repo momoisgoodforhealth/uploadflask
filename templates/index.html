@@ -1,0 +1,39 @@
+﻿<!doctype html>
+<style>
+    #Progress_Status {
+        width: 50%;
+        background-color: #ddd;
+    }
+
+    #myprogressBar {
+        width: 2%;
+        height: 20px;
+        background-color: #4CAF50;
+    }
+</style>
+<title>Upload new File</title>
+<body>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+        <input type=file name=file>
+        <input type=submit value=Upload onclick="update()">
+    </form>
+    <div id="Progress_Status">
+        <div id="myprogressBar"></div>
+    </div>
+    <script>
+        function update() {
+            var element = document.getElementById("myprogressBar");
+            var width = 1;
+            var identity = setInterval(scene, 10);
+            function scene() {
+                if (width >= 100) {
+                    clearInterval(identity);
+                } else {
+                    width++;
+                    element.style.width = width + '%';
+                }
+            }
+        }
+    </script>
+</body>

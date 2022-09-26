@@ -1,0 +1,5 @@
+﻿{% for item in data %}
+<input type="button" value={{ item }}><br />
+<p> {{ item }} </p><br />
+<a href="/static/{{ item }}">{{ item }}</a>
+{% endfor %}

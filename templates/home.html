@@ -1,0 +1,119 @@
+﻿<!doctype html>
+<a href="/downloads">Downloads</a>
+<style>
+    #Progress_Status {
+        width: 50%;
+    }
+
+    #myprogressBar {
+        width: 0%;
+        height: 20px;
+        background-color: #4CAF50;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+<title>DeltaV Files Upload</title>
+<h1>DeltaV Files Upload</h1>
+<h2>Ride Parameters: (If Ride ID is not found, you can type in a new one)</h2>
+<form method=post enctype=multipart/form-data>
+
+    <label for="id">Ride ID: </label>
+    <input type="text" list="id" name="id" />
+    <datalist id="id">
+        <option>901</option>
+        <option>801</option>
+        <option>701</option>
+        <option>501</option>
+    </datalist><br>
+
+    <label for="type">Ride Type: </label>
+    <input type="text" list="type" name="type" />
+    <datalist id="type">
+        <option>Steel Coaster</option>
+        <option>Wood Coaster</option>
+        <option>Flat Ride</option>
+        <option>Round Ride</option>
+        <option>Boat Ride</option>
+        <option>Other</option>
+    </datalist><br>
+
+    <label for="restraint">Restraint: </label>
+    <input type="text" list="restraint" name="restraint" />
+    <datalist id="restraint">
+        <option>Class 1</option>
+        <option>Class 2</option>
+        <option>Class 3</option>
+        <option>Class 4</option>
+        <option>Class 5</option>
+    </datalist><br>
+
+    <label for="headrest">Headrests? </label>
+    <input type="text" list="headrest" name="headrest" />
+    <datalist id="headrest">
+        <option>Yes</option>
+        <option>No</option>
+    </datalist><br>
+
+    <label for="hz256">Less than 256Hz Sampling?</label>
+    <input type="text" list="hz256" name="hz256" />
+    <datalist id="hz256">
+        <option>Yes</option>
+        <option>No</option>
+    </datalist><br>
+
+    <label for="injuries">Injuries Related to DeltaV?</label>
+    <input type="text" list="injuries" name="injuries" />
+    <datalist id="injuries">
+        <option>Yes</option>
+        <option>No</option>
+    </datalist><br>
+
+    <label for="datadate">Data Date:</label>
+    <input type="date" id="datadate" name="datadate"><br>
+    <br />
+    <br />
+
+    <h2>Calculation Parameters:</h2>
+    <label for="filter">Filter Frequency: </label>
+    <input type=text name="filter" value="10.0"><br>
+    <label for="samplerate">Sample Rate: </label>
+    <input type=text name="SampleRate" value="1000"><br>
+    <label for="Ginterval">G Interval: </label>
+    <input type=text name="Ginterval" value="0.05"><br>
+    <label for="lowextent">Low Extent: </label>
+    <input type=text name="lowextent"><br>
+    <label for="highextent">High Extent: </label>
+    <input type=text name="highextent"><br>
+    <label for="eventcountmin">Event Count Min Value: </label>
+    <input type=text name="eventcountmin" value="-8"><br>
+    <label for="eventcountmax">Event Count Max Value: </label>
+    <input type=text name="eventcountmax" value="8"><br>
+    <label for="eventcountinterval">Event Count Interval: </label>
+    <input type=text name="eventcountinterval" value="0.5"><br>
+    <br>
+    <p>
+        <label for="files[]">Please Upload CSV File </label>
+    </p>
+    <input type=file name="files[]" multiple="true"><br><br />
+    <br />
+    <input type=submit value=Upload onclick="update()"><br>
+</form>
+<br />
+<div id="Progress_Status">
+    <div id="myprogressBar"></div>
+</div>
+<script>
+    function update() {
+        var element = document.getElementById("myprogressBar");
+        var width = 1;
+        var identity = setInterval(scene, 10);
+        function scene() {
+            if (width >= 100) {
+                clearInterval(identity);
+            } else {
+                width++;
+                element.style.width = width + '%';
+            }
+        }
+    }
+</script>
