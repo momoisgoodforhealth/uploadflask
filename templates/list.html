@@ -1,5 +1,8 @@
-﻿{% for item in data %}
-<input type="button" value={{ item }}><br />
-<p> {{ item }} </p><br />
-<a href="/static/{{ item }}">{{ item }}</a>
-{% endfor %}
+﻿<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+<title>Downloads</title>
+<body>
+    <h1>Choose the Ride ID to Download Content</h1>
+    {% for item in data %}
+    <a href="/static/{{ item }}">{{ item }}</a>
+    {% endfor %}
+</body>     

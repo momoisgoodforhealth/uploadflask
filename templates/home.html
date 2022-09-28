@@ -1,5 +1,4 @@
 ﻿<!doctype html>
-<a href="/downloads">Downloads</a>
 <style>
     #Progress_Status {
         width: 50%;
@@ -67,9 +66,6 @@
         <option>Yes</option>
         <option>No</option>
     </datalist><br>
-
-    <label for="datadate">Data Date:</label>
-    <input type="date" id="datadate" name="datadate"><br>
     <br />
     <br />
 
@@ -80,10 +76,6 @@
     <input type=text name="SampleRate" value="1000"><br>
     <label for="Ginterval">G Interval: </label>
     <input type=text name="Ginterval" value="0.05"><br>
-    <label for="lowextent">Low Extent: </label>
-    <input type=text name="lowextent"><br>
-    <label for="highextent">High Extent: </label>
-    <input type=text name="highextent"><br>
     <label for="eventcountmin">Event Count Min Value: </label>
     <input type=text name="eventcountmin" value="-8"><br>
     <label for="eventcountmax">Event Count Max Value: </label>
@@ -91,6 +83,17 @@
     <label for="eventcountinterval">Event Count Interval: </label>
     <input type=text name="eventcountinterval" value="0.5"><br>
     <br>
+    <h2>Run Characteristics:</h2>
+    <label for="datadate">Data Date:</label>
+    <input type="date" id="datadate" name="datadate"><br>
+    <label for="airtemp">Air Temperature: </label>
+    <input type=text name="airtemp"><br>
+    <label for="humidity">Humidity: </label>
+    <input type=text name="humidity"><br>
+    <label for="atmospressure">Atmospheric Pressure: </label>
+    <input type=text name="atmospressure"><br>
+    <label for="disposition">Disposition: </label>
+    <input type=text name="disposition"><br>
     <p>
         <label for="files[]">Please Upload CSV File </label>
     </p>
@@ -117,3 +120,4 @@
         }
     }
 </script>
+<a href="/downloads">Downloads</a>

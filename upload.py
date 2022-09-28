@@ -56,11 +56,14 @@ def upload_file():
                 filterfreq=request.form['filter'].upper()
                 rate=request.form['SampleRate'].upper()
                 ginterval=request.form['Ginterval'].upper()
-                lowext=request.form['lowextent'].upper()
-                highext=request.form['highextent'].upper()
                 eventcountmax=request.form['eventcountmax'].upper()
                 eventcountmin=request.form['eventcountmin'].upper()
                 eventcountinterval=request.form['eventcountinterval'].upper()
+                airtemp=request.form['airtemp'].upper()
+                humidity=request.form['humidity'].upper()
+                atmospressure=request.form['atmospressure'].upper()
+                disposition=request.form['disposition'].upper()
+
 
 
                 folder=processed_text+"/"
@@ -75,7 +78,7 @@ def upload_file():
                 filer.save(os.path.join(UPLOAD_FOLDER2, filename))
                 #textfile = open("b.txt", "w")
                 textfile = open("b.txt", "w")
-                textfile.write(processed_text+"\n"+ridetype+"\n"+restraint+"\n"+date+"\n"+filterfreq+"\n"+rate+"\n"+ginterval+"\n"+lowext+"\n"+highext)
+                textfile.write(processed_text+"\n"+ridetype+"\n"+restraint+"\n"+date+"\n"+filterfreq+"\n"+rate+"\n"+ginterval+"\n"+airtemp+"\n"+humidity+"\n"+atmospressure+"\n"+disposition)
 
                 
                 #shutil.copy('b.txt',processed_text+".txt")
@@ -86,11 +89,11 @@ def upload_file():
                 #textfile2 = open("/home/momoisgoodforhealth/Flask_upload/"+folder+processed_text+".txt", "w")
                 shutil.copy('b.txt', UPLOAD_FOLDER3+processed_text+".txt")
                 textfile2 = open(UPLOAD_FOLDER3+processed_text+".txt", "w")
-                textfile2.write("RIDEID="+processed_text+"\n"+"RIDETYPE="+ridetype+"\n"+"RESTRAINT="+restraint+"\n"+"HEADREST="+headrest+"\n"+"256HZ="+hz256+"\n"+"INJURIES="+injuries+"\n"+"DATE="+date+"\n"+"FILTER FREQUENCY="+filterfreq+"\n"+"RATE="+rate+"\n"+"G INTERVAL="+ginterval+"\n"+"LOW EXTENT="+lowext+"\n"+"HIGH EXTENT="+highext+"\n"+"EVENT COUNT MAX="+eventcountmax+"\n"+"EVENT COUNT MIN="+eventcountmin+"\n"+"EVENT COUNT INT="+eventcountinterval+"\n")
+                textfile2.write("RIDEID="+processed_text+"\n"+"RIDETYPE="+ridetype+"\n"+"RESTRAINT="+restraint+"\n"+"HEADREST="+headrest+"\n"+"256HZ="+hz256+"\n"+"INJURIES="+injuries+"\n"+"DATE="+date+"\n"+"FILTER FREQUENCY="+filterfreq+"\n"+"RATE="+rate+"\n"+"G INTERVAL="+ginterval+"\n"+"EVENT COUNT MAX="+eventcountmax+"\n"+"EVENT COUNT MIN="+eventcountmin+"\n"+"EVENT COUNT INT="+eventcountinterval+"\n"+"AIR TEMPERATURE="+airtemp+"\n"+"HUMIDITY="+humidity+"\n"+"ATMOSPHERIC PRESSURE="+atmospressure+"\n"+"DISPOSITION="+disposition)
                 #return redirect(url_for('download_file', name=filename))
 
 
-        return 'Upload Success!'
+        return render_template("upload_success.html")
 
     #<input type=text name="id"><br>n
     return render_template("home.html")
@@ -99,18 +102,23 @@ def upload_file():
 from flask import send_from_directory
 dir_path = "/uploads/"
 rideids=[]
-#for path in os.listdir(dir_path):
-       # rideids.append(path)
-        
+for path in os.listdir(os.path.join(app.root_path,'uploads/')):
+        rideids.append(path)
+
+for rideid in rideids:
+    shutil.make_archive(rideid+'zip','zip','uploads/'+rideid)
+
 @app.route('/downloads/', methods = ['GET', 'POST'])
 def list_folders():
-    shutil.make_archive('/assets/789zip','zip','/home/momoisgoodforhealth/Flask_upload/uploads/789')
+    #shutil.make_archive('69zip','zip','uploads/69/')
     #return send_from_directory(app.config["UPLOAD_FOLDER"], name)
     return render_template("list.html", data=rideids)
 
-@app.route('/static/789/', methods = ['GET', 'POST'])
-def download_file():
-    return send_file("/assets/789zip.zip", as_attachment=True)
+#@app.route('/static/69/', methods = ['GET', 'POST'])
+#def download_file():
+#    return send_file("69zip.zip", as_attachment=True)
 
 
-
+@app.route('/static/<id>/', methods = ['GET', 'POST'])
+def testing(id=rideid):
+    return send_file(id+"zip.zip", as_attachment=True)
