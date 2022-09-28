@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Hi</title>
+</head>
+<body>
+    {% for item in data %}
+    <a href="/static/{{ item }}">{{ item }}</a>
+    <input type="text" value={{item}} />
+    {% endfor %}    
+    <h1>{{data[1]}}</h1>
+</body>
+</html>

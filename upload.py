@@ -6,6 +6,7 @@ import random
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+testdata=["helo","helo","helo","helo","helo"]
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -65,10 +66,15 @@ def upload_file():
                 disposition=request.form['disposition'].upper()
 
 
-
                 folder=processed_text+"/"
                 UPLOAD_FOLDER2=os.path.join(app.root_path,'uploads/',folder,rnd)
                 UPLOAD_FOLDER3=os.path.join(app.root_path,'uploads/', folder)
+
+                #if os.path.isdir(UPLOAD_FOLDER3):
+                #    with open() as f:
+                #        lines=f.readline()
+                #testdata=[text,processed_text,ridetype,restraint,headrest]
+
                 if not os.path.isdir(UPLOAD_FOLDER2):
                     os.makedirs(UPLOAD_FOLDER2)
                 if not os.path.isdir(UPLOAD_FOLDER3):
@@ -122,3 +128,7 @@ def list_folders():
 @app.route('/static/<id>/', methods = ['GET', 'POST'])
 def testing(id=rideid):
     return send_file(id+"zip.zip", as_attachment=True)
+
+@app.route('/test/', methods = ['GET', 'POST'])
+def test():
+    return render_template("test.html",data=testdata)
