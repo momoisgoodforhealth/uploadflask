@@ -19,9 +19,38 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+idnum=0
+store=[]
 @app.route('/', methods=['GET', 'POST'])
+def rider():
+    if request.method == 'POST':
+        text = request.form['id']
+        processed_text = text.upper()
+        folder=processed_text+"/"
+        UPLOAD_FOLDER3=os.path.join(app.root_path,'uploads/', folder)
+        if os.path.isdir(UPLOAD_FOLDER3):
+            f = open("uploads/"+processed_text+"/"+processed_text+".txt", "r")
+            lines=f.readlines()
+            for line in lines:
+                cnt=0
+                length=len(line)
+                for i in line:
+                    if i=="=":
+                        value=line[cnt+1:length]
+                        store.append(value)
+                    cnt=cnt+1
+            #idno=f.read(10)
+            #idnum=idno[7:10]
+            return redirect('/form')
+        else:
+            return redirect('/form')
+    return render_template("rideid.html")
+
+
+@app.route('/form',methods=['GET', 'POST'])
 def upload_file():
-    count=0
+    count=0 
     if request.method == 'POST':
         # check if the post request has the file part
         if 'files[]' not in request.files:
@@ -71,8 +100,10 @@ def upload_file():
                 UPLOAD_FOLDER3=os.path.join(app.root_path,'uploads/', folder)
 
                 #if os.path.isdir(UPLOAD_FOLDER3):
+                #    f = open(processed_text+".txt", "r")
+                #    print(f.read())
                 #    with open() as f:
-                #        lines=f.readline()
+                #      lines=f.readline()
                 #testdata=[text,processed_text,ridetype,restraint,headrest]
 
                 if not os.path.isdir(UPLOAD_FOLDER2):
@@ -102,7 +133,7 @@ def upload_file():
         return render_template("upload_success.html")
 
     #<input type=text name="id"><br>n
-    return render_template("home.html")
+    return render_template("home.html", data=store)
 
 
 from flask import send_from_directory

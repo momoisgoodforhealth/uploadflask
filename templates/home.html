@@ -14,10 +14,10 @@
 <title>DeltaV Files Upload</title>
 <h1>DeltaV Files Upload</h1>
 <h2>Ride Parameters: (If Ride ID is not found, you can type in a new one)</h2>
-<form method=post enctype=multipart/form-data>
 
+<form method=post enctype=multipart/form-data>
     <label for="id">Ride ID: </label>
-    <input type="text" list="id" name="id" />
+    <input type="text" list="id" name="id" value="{{data[0]}}" />
     <datalist id="id">
         <option>901</option>
         <option>801</option>
@@ -26,7 +26,7 @@
     </datalist><br>
 
     <label for="type">Ride Type: </label>
-    <input type="text" list="type" name="type" />
+    <input type="text" list="type" name="type" value="{{data[1]}}"/>
     <datalist id="type">
         <option>Steel Coaster</option>
         <option>Wood Coaster</option>
@@ -37,7 +37,7 @@
     </datalist><br>
 
     <label for="restraint">Restraint: </label>
-    <input type="text" list="restraint" name="restraint" />
+    <input type="text" list="restraint" name="restraint" value="{{data[2]}}"/>
     <datalist id="restraint">
         <option>Class 1</option>
         <option>Class 2</option>
@@ -47,21 +47,21 @@
     </datalist><br>
 
     <label for="headrest">Headrests? </label>
-    <input type="text" list="headrest" name="headrest" />
+    <input type="text" list="headrest" name="headrest" value="{{data[3]}}"/>
     <datalist id="headrest">
         <option>Yes</option>
         <option>No</option>
     </datalist><br>
 
     <label for="hz256">Less than 256Hz Sampling?</label>
-    <input type="text" list="hz256" name="hz256" />
+    <input type="text" list="hz256" name="hz256" value="{{data[4]}}"/>
     <datalist id="hz256">
         <option>Yes</option>
         <option>No</option>
     </datalist><br>
 
     <label for="injuries">Injuries Related to DeltaV?</label>
-    <input type="text" list="injuries" name="injuries" />
+    <input type="text" list="injuries" name="injuries" value="{{data[5]}}"/>
     <datalist id="injuries">
         <option>Yes</option>
         <option>No</option>
@@ -85,15 +85,15 @@
     <br>
     <h2>Run Characteristics:</h2>
     <label for="datadate">Data Date:</label>
-    <input type="date" id="datadate" name="datadate"><br>
+    <input type="date" id="datadate" name="datadate" value="{{data[12]}}"><br>
     <label for="airtemp">Air Temperature: </label>
-    <input type=text name="airtemp"><br>
+    <input type=text name="airtemp" value="{{data[13]}}"><br>
     <label for="humidity">Humidity: </label>
-    <input type=text name="humidity"><br>
+    <input type=text name="humidity" value="{{data[14]}}"><br>
     <label for="atmospressure">Atmospheric Pressure: </label>
-    <input type=text name="atmospressure"><br>
+    <input type=text name="atmospressure" value="{{data[15]}}"><br>
     <label for="disposition">Disposition: </label>
-    <input type=text name="disposition"><br>
+    <input type=text name="disposition" value="{{data[16]}}"><br>
     <p>
         <label for="files[]">Please Upload CSV File </label>
     </p>

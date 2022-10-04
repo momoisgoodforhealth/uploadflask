@@ -1,0 +1,16 @@
+﻿<!doctype html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/styles.css') }}">
+<title>DeltaV Files Upload</title>
+<h1>DeltaV Files Upload</h1>
+<h2>Ride Parameters: (If Ride ID is not found, you can type in a new one)</h2>
+<form method=post enctype=multipart/form-data>
+
+    <label for="id">Ride ID: </label>
+    <input type="text" list="id" name="id" />
+    <datalist id="id">
+    </datalist><br>
+    <br />
+    <input type=submit value=Submit>
+</form>
+<br>
+<a href="/downloads">Downloads</a>
